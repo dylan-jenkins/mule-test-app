@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	options {
-		buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '3'))
+		buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '1'))
 		timestamps()
 		disableConcurrentBuilds()
 		skipDefaultCheckout()
@@ -12,16 +12,17 @@ pipeline {
 		jdk '1.8.0_162'
 	}
 	
+	triggers {
+		pollSCM('H/1 * * * *')
+	}
 	stages {
 		stage('Test') {
 			steps {
-				withMaven () {
-					bat 'mvn clean test'
-				}
+				bat 'mvn clean test'
 			}
 		}
 
-		stage('Deploy CloudHub') {
+		stage('Deploy') {
 			environment {
 				ANYPOINT_PLATFORM = credentials('anypoint.platform')
 			}
