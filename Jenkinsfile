@@ -1,24 +1,24 @@
 pipeline {
 	agent any
 	options {
-		buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '1'))
+		buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '2'))
 		timestamps()
 		disableConcurrentBuilds()
 		skipDefaultCheckout()
 	}
 	
 	tools {
-		maven  '3.5.2'
-		jdk '1.8.0_162'
+		maven  'Maven 3.5.2'
+		jdk 'latest'
 	}
 	
 	triggers {
-		pollSCM('H/1 * * * *')
+		pollSCM('* * * * *')
 	}
 	stages {
 		stage('Test') {
 			steps {
-				bat 'mvn clean install'
+				bat 'mvn clean test'
 			}
 		}
 
