@@ -8,8 +8,8 @@ pipeline {
 	}
 	
 	tools {
-		maven  '3.5.2'
-		jdk '1.8.0_162'
+		maven  'Maven 3.5.2'
+		jdk 'latest'
 	}
 	
 	triggers {
@@ -18,7 +18,7 @@ pipeline {
 	stages {
 		stage('Test') {
 			steps {
-				bat 'mvn clean install'
+				bat 'mvn clean test'
 			}
 		}
 
