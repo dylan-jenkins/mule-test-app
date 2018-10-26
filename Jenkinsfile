@@ -4,7 +4,7 @@ pipeline {
 		buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '2'))
 		timestamps()
 		disableConcurrentBuilds()
-		skipDefaultCheckout()
+//		skipDefaultCheckout()
 	}
 	
 	tools {
