@@ -27,7 +27,7 @@ pipeline {
 				ANYPOINT_PLATFORM = credentials('anypoint.platform')
 			}
 			steps {
-				bat 'mvn deploy -P cloudhub -Dmule.version=3.9.0 -Danypoint.username=${ANYPOINT_PLATFORM_USR} -Danypoint.password=${ANYPOINT_PLATFORM_PSW}'
+				bat 'mvn deploy -P cloudhub -Dmule.version=3.9.1 -Danypoint.username=${ANYPOINT_PLATFORM_USR} -Danypoint.password=${ANYPOINT_PLATFORM_PSW}'
 			}
 		}
 	}
