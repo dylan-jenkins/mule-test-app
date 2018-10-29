@@ -3,21 +3,21 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
-    <http:listener-config name="api-httpListenerConfig" host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration"/>
-    <apikit:config name="api-config" raml="api.raml" consoleEnabled="false" doc:name="Router"/>
-    <flow name="api-main">
-        <http:listener config-ref="api-httpListenerConfig" path="/api/*" doc:name="HTTP"/>
-        <apikit:router config-ref="api-config" doc:name="APIkit Router"/>
-        <exception-strategy ref="api-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    <http:listener-config name="muletestdpj-httpListenerConfig" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <apikit:config name="muletestdpj-config" raml="muletestdpj.raml" consoleEnabled="false" doc:name="Router"/>
+    <flow name="muletestdpj-main">
+        <http:listener config-ref="muletestdpj-httpListenerConfig" path="/api/*" doc:name="HTTP"/>
+        <apikit:router config-ref="muletestdpj-config" doc:name="APIkit Router"/>
+        <exception-strategy ref="muletestdpj-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
     </flow>
-    <flow name="api-console">
-        <http:listener config-ref="api-httpListenerConfig" path="/console/*" allowedMethods="GET" doc:name="HTTP"/>
-        <apikit:console config-ref="api-config" doc:name="APIkit Console"/>
+    <flow name="muletestdpj-console">
+        <http:listener config-ref="muletestdpj-httpListenerConfig" path="/console/*" doc:name="HTTP"/>
+        <apikit:console config-ref="muletestdpj-config" doc:name="APIkit Console"/>
     </flow>
-    <flow name="get:/hello:api-config">
+    <flow name="get:/hello:muletestdpj-config">
         <set-payload value="{ &quot;message&quot;: &quot;Hello&quot; }" doc:name="Set Payload"/>
     </flow>
-    <apikit:mapping-exception-strategy name="api-apiKitGlobalExceptionMapping">
+    <apikit:mapping-exception-strategy name="muletestdpj-apiKitGlobalExceptionMapping">
         <apikit:mapping statusCode="404">
             <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
             <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
