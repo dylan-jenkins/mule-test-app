@@ -15,7 +15,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         <apikit:console config-ref="muletestdpj-config" doc:name="APIkit Console"/>
     </flow>
     <flow name="get:/hello:muletestdpj-config">
-        <set-payload value="{ &quot;message&quot;: &quot;Hello&quot; }" doc:name="Set Payload"/>
+        <set-payload value="{&#xA;&quot;testApp&quot; : &quot;yes&quot;&#xA;}" doc:name="Set Payload"/>
     </flow>
     <apikit:mapping-exception-strategy name="muletestdpj-apiKitGlobalExceptionMapping">
         <apikit:mapping statusCode="404">
