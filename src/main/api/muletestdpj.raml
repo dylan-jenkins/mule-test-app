@@ -1,7 +1,7 @@
 #%RAML 1.0
 version: v1
-baseUri: www.test.com
-title: TestAppDPJ
+baseUri: http://myapi.mysite.com/api/{version}
+title: muletestdpj
 
 /hello:
   get:
@@ -9,4 +9,4 @@ title: TestAppDPJ
       200:
         body:
           application/json:
-            example: {'testApp':'yes'}
+            example: {'reply':'hello'}
