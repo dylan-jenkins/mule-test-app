@@ -12,30 +12,27 @@ pipeline {
 		jdk 'latest'
 	}
 	
-	triggers {
-		pollSCM('* * * * *')
-	}
 	stages {
-		stage('Echo') {
-			steps {
-				bat 'echo %GIT_COMMITTER_EMAIL%'
-				bat 'echo %GIT_AUTHOR_EMAIL%'
-				bat 'echo %BUILD_NUMBER%'
-			}
-		}
+
 		stage('Test') {
 			steps {
 				bat 'mvn clean test'
 			}
 		}
 
-		stage('Deploy') {
-			environment {
-				ANYPOINT_PLATFORM = credentials('anypoint.platform')
-			}
+		stage('package') {
 			steps {
-				bat 'mvn deploy -P cloudhub -Dmule.version=3.9.1 -Danypoint.username=${ANYPOINT_PLATFORM_USR} -Danypoint.password=${ANYPOINT_PLATFORM_PSW}'
+				bat 'mvn package'
 			}
 		}
+		
+//		stage('Deploy') {
+//			environment {
+//				ANYPOINT_PLATFORM = credentials('anypoint.platform')
+//			}
+//			steps {
+//				bat 'mvn deploy -P cloudhub -Dmule.version=3.9.1 -Danypoint.username=${ANYPOINT_PLATFORM_USR} -Danypoint.password=${ANYPOINT_PLATFORM_PSW}'
+//			}
+//		}
 	}
 }
