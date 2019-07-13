@@ -18,9 +18,10 @@ pipeline {
 	stages {
 		stage('Echo') {
 			steps {
-				bat 'echo %GIT_LOCAL_BRANCH%'
-				bat 'echo %$(GIT_COMMITTER_EMAIL)%'
-				bat 'echo %$(GIT_AUTHOR_EMAIL)%'
+				bat 'echo %BUILD_NUMBER%'
+				bat 'echo %${BUILD_NUMBER}%'
+				bat 'echo %${GIT_COMMITTER_EMAIL}%'
+				bat 'echo %${GIT_AUTHOR_EMAIL}%'
 			}
 		}
 		stage('Test') {
