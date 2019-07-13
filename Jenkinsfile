@@ -18,6 +18,7 @@ pipeline {
 	stages {
 		stage('Echo') {
 			steps {
+				bat 'echo %JAVA_HOME%'
 				bat 'echo %$(GIT_COMMITTER_EMAIL)%'
 				bat 'echo %$(GIT_AUTHOR_EMAIL)%'
 			}
